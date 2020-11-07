@@ -11,22 +11,27 @@ os.environ['NO_PROXY'] = '127.0.0.1'
 # Event logger
 class Event(LoggingEventHandler):
     def on_created(self, event):
-        print("created", event)
-        r = requests.get('http://127.0.0.1:8000/created/')
-        print(r.content)
+        url = 'http://127.0.0.1:8000/created/'
+        data = {'event': event}
+        r = requests.post(url, data=data)
     def on_deleted(self, event):
-        print("Deleted", event)
+        url = 'http://127.0.0.1:8000/deleted/'
+        data = {'event': event}
+        r = requests.post(url, data=data)
     def on_modified(self, event):
-        print("Modified", event)
+        url = 'http://127.0.0.1:8000/modified/'
+        data = {'event': event}
+        r = requests.post(url, data=data)
     def on_moved(self,event):
-        print("Renamed or Moved", event)
+        url = 'http://127.0.0.1:8000/moved/'
+        data = {'event': event}
+        r = requests.post(url, data=data)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
-    path = '/home/ishant/Downloads'
-    print(path)
+    path = '/home/ishant/Downloads/new'
     event_handler = Event()
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
