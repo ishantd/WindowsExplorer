@@ -1,0 +1,29 @@
+{% extends 'drive/base.html' %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="my-3">
+            <div class="h3">File Explorer</div>
+        </div>
+
+        <div class="file-tree">
+            <ul id="root">
+                <li>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-folder"></i> Folder 1
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <ul class="child">
+                            <li>File</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+{% endblock  %}
