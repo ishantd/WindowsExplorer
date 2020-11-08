@@ -1,0 +1,10 @@
+<FileMovedEvent: src_path='/home/ishant/Downloads/new/newfile12.txt', dest_path='/home/ishant/Downloads/new/newfile12r.txt'>
+[08/Nov/2020 12:33:28] "POST /moved/ HTTP/1.1" 200 0
+<DirModifiedEvent: src_path='/home/ishant/Downloads/new'>
+[08/Nov/2020 12:33:28] "POST /modified/ HTTP/1.1" 200 0
+<DirMovedEvent: src_path='/home/ishant/Downloads/new/test2', dest_path='/home/ishant/Downloads/new/test1/test2'>
+[08/Nov/2020 12:33:56] "POST /moved/ HTTP/1.1" 200 0
+<DirModifiedEvent: src_path='/home/ishant/Downloads/new'>
+[08/Nov/2020 12:33:56] "POST /modified/ HTTP/1.1" 200 0
+<DirModifiedEvent: src_path='/home/ishant/Downloads/new/test1'>
+[08/Nov/2020 12:33:56] "POST /modified/ HTTP/1.1" 200 0
