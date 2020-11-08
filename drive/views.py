@@ -45,3 +45,24 @@ def created(request):
             if created:
                 print("Directory created in database")
     return HttpResponse(status=200)
+
+@csrf_exempt
+def deleted(request):
+    if request.method == 'POST':
+        event = request.POST.get('event')
+        if 'FileDeletedEvent' in event:
+            event = event.replace("'", '"')
+            path = re.findall(r'"([^"]*)"', event)[0]
+            try:
+                file = File.objects.get(path=path).delete()
+            except:
+                print("Unable to delete, file does not exist")
+        if 'DirDeletedEvent' in event:
+            event = event.replace("'", '"')
+            path = re.findall(r'"([^"]*)"', event)[0]
+            try:
+                directory= Directory.objects.get(path=path).delete()
+                print("Directory deleted")
+            except:
+                print("Unable to delete, directory does not exist")
+    return HttpResponse(status=200)
