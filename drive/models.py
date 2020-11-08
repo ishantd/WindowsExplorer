@@ -7,7 +7,7 @@ class Directory(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     path = models.TextField(null=True, blank=True)
     created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField()
+    modified = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -15,6 +15,9 @@ class Directory(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(Directory, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name
 
 class File(models.Model):
     parent = models.ForeignKey(Directory, null=True, blank=True, on_delete=models.CASCADE)
@@ -31,3 +34,6 @@ class File(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(File, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name

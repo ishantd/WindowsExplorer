@@ -1,6 +1,7 @@
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from drive.models import *
 
 import re
 
@@ -16,4 +17,18 @@ def created(request):
         if 'FileCreatedEvent' in event:
             event = event.replace("'", '"')
             path = re.findall(r'"([^"]*)"', event)[0]
+            name = path.split('/')[-1]
+            extension = name.split('.')[-1]
+            parent_path = path.replace(name, "")
+            parent = Directory.objects.get(path=parent_path)
+            data = {
+                'parent': parent,
+                'name': name,
+                'extension': extension,
+                'path': path,
+                'extension': extension,
+            }
+            file, created = File.objects.get_or_create(**data)
+            if created:
+                print("File created in database")
     return HttpResponse(status=200)
