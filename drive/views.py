@@ -7,7 +7,10 @@ import re
 
 
 def index(request):
-    return render(request, 'drive/index.html')
+    root = Directory.objects.filter(parent__name='root')
+    f = File.objects.filter(parent__name='root')
+    context = {'root': root, 'root_files': f}
+    return render(request, 'drive/index.html', context)
 
 
 @csrf_exempt

@@ -1,0 +1,17 @@
+{% for dir in root %}
+    <li>
+        folder {{ dir.name }}
+        {% if dir.directory_set.all %}
+            <ul>
+                {% include "drive/includes/_tree.html" with root=dir.directory_set.all %}
+            </ul>
+        {% endif %}
+        {% if dir.file_set.all %}
+            <ul>
+                {% for f in dir.file_set.all %}
+                        <li> File {{f.name}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

@@ -10,16 +10,19 @@
 
         <div class="file-tree">
             <ul id="root">
+            {% include 'drive/includes/_tree.html' %}
+            {% comment %} {% for dir in root %}
                 <li>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fas fa-folder"></i> Folder 1
+                    <a class="" data-toggle="collapse" href="#collapse{{dir.id}}" role="button" aria-expanded="false" aria-controls="collapse{{dir.id}}">
+                        <i class="fas fa-folder"></i> {{dir.name}}
                     </a>
-                    <div class="collapse" id="collapseExample">
-                        <ul class="child">
-                            <li>File</li>
-                        </ul>
-                    </div>
                 </li>
+            {% endfor %} {% endcomment %}
+            
+            {% for f in root_files %}
+                <li> File {{f.name}}</li>
+            {% endfor %}
+                
             </ul>
         </div>
     </div>
