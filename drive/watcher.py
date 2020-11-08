@@ -2,14 +2,18 @@ import sys
 import time
 import logging
 from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler
+from watchdog.events import LoggingEventHandler, PatternMatchingEventHandler, RegexMatchingEventHandler
 import os
 import requests
 
 os.environ['NO_PROXY'] = '127.0.0.1'
 
 # Event logger
-class Event(LoggingEventHandler):
+class Event(RegexMatchingEventHandler):
+
+    def __init__(self):
+        super(Event, self).__init__(ignore_regexes=['^[.]{1}.*', '.*/[.]{1}.*'])
+
     def on_created(self, event):
         url = 'http://127.0.0.1:8000/created/'
         data = {'event': event}

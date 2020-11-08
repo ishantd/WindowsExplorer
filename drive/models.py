@@ -23,7 +23,7 @@ class File(models.Model):
     parent = models.ForeignKey(Directory, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
     extension = models.CharField(max_length=200, null=True, blank=True)
-    path = models.TextField(null=True, blank=True)
+    path = models.TextField(null=True, blank=True, unique=True)
     filetype = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField()
