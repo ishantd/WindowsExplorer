@@ -1,6 +1,9 @@
 {% for dir in root %}
     <li>
-        folder {{ dir.name }}
+     <a class="" data-toggle="collapse" href="#collapse{{dir.id}}" role="button" aria-expanded="false" aria-controls="collapse{{dir.id}}">
+        <i class="fas fa-folder"></i> {{dir.name}}
+    </a>
+        <div class="collapse" id="collapse{{dir.id}}">
         {% if dir.directory_set.all %}
             <ul>
                 {% include "drive/includes/_tree.html" with root=dir.directory_set.all %}
@@ -9,9 +12,10 @@
         {% if dir.file_set.all %}
             <ul>
                 {% for f in dir.file_set.all %}
-                        <li> File {{f.name}}</li>
+                        <li> <a href=""> <i class="far fa-file"></i> File {{f.name}} </a></li>
                 {% endfor %}
             </ul>
         {% endif %}
+        </div>
     </li>
 {% endfor %}
